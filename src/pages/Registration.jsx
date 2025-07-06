@@ -25,7 +25,7 @@ export default function Registration() {
         </div>
         <div className='relative'>
             <img src={frame} alt="frame" className='absolute top-2 right-0'/>
-            <img src={wallpaper} alt="wallpaper" className='absolute top-2 right-0' />
+            <img src={wallpaper} alt="wallpaper" className='absolute top-8 right-3' />
         </div>
     </div>
   )

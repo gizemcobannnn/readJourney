@@ -6,7 +6,7 @@ import wallpaper from "../assets/wallpaper.svg"
 import { toast } from 'react-toastify';
 
 
-export default function Registration() {
+export default function Login() {
   const handleSubmit=()=>{
     try{
         toast.success("Successful registration")
@@ -15,9 +15,6 @@ export default function Registration() {
     }
   }
   const validationRegister=Yup.object({
-    name:Yup.string()
-    .min(6, "It has to be at least 6 characters")
-    .max(20, "It can be at most 20 characters").required("You have to enter your name"),
     email:Yup.string().email()
     .min(6, "It has to be at least 6 characters")
     .max(20, "It can be at most 20 characters").required("You have to enter your email"),
@@ -34,15 +31,13 @@ export default function Registration() {
                 <h1 className='text-start text-5xl font-semibold'>Expand your mind, reading <span className='text-white/40'>a book</span></h1>
                 <Formik initialValues={{name:"",email:"",password:""}} onSubmit={handleSubmit} validationSchema={validationRegister}>
                     <Form className='flex flex-col gap-5'>
-                        <Field name="name" type="text" placeholder="Name" />
-                        <ErrorMessage name="name" component="div" className='errormessage' />
                         <Field name="email" type="email" placeholder="Email"/>
                         <ErrorMessage name="name" component="div" className='errormessage' />
                         <Field name="password" type="password" placeholder="Password"/>
                         <ErrorMessage name="name" component="div" className='errormessage' />
                         <div className='flex flex-row justify-between mt-7'>
-                        <button type="submit" className='authbutton'>Register</button>
-                        <button type="button">Already have an account ?</button></div>
+                        <button type="submit" className='authbutton'>Login</button>
+                        <button type="button">Don't have an account ?</button></div>
                     </Form>
                 </Formik>
             </div>

@@ -3,10 +3,16 @@ import {Formik,Form,Field,ErrorMessage} from "formik"
 import * as Yup from "yup";
 import frame from "../assets/screen-frame.svg"
 import wallpaper from "../assets/wallpaper.svg"
+import { toast } from 'react-toastify';
+
 
 export default function Registration() {
   const handleSubmit=()=>{
-
+    try{
+        toast.success("Successful registration")
+    }catch(e){
+        toast.error("Unsuccessful registration"+e)
+    }
   }
   const validationRegister=Yup.object({
     name:Yup.string()

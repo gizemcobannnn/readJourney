@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 export default function Header() {
   return (
-    <div className='fixed z-50 top-0 left-0 w-full p-2 flex flex-row justify-between text-white'>
+    <div className='fixed z-50 top-0 left-0 w-full p-2 text-white'>
         <h1>READ JOURNEY</h1>
         <nav>
            <NavLink  to="/" className="navlink">Home</NavLink> 

@@ -24,3 +24,9 @@
   color:black;
   width: 10em;
 }
+
+.navlink{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-bottom: rgb(6, 6, 99) 2px solid;
+}

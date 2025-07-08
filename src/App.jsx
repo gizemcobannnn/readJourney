@@ -7,14 +7,14 @@ import { ToastContainer } from 'react-toastify';
 import Myreading from './pages/Myreading';
 import Mylibrary from './pages/Mylibrary';
 
-
 function App() {
 
 
   return (
     <>
   
-     <Mylibrary />
+     <Header />
+     <AppRoute />
      <ToastContainer />
     </>
   )

@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-
+import { Route,Routes } from "react-router-dom";
 export default function AppRoute() {
   const Login = lazy(() => import("../../pages/Login.jsx"));
   const Register = lazy(() => import("../../pages/Registration.jsx"));

@@ -6,13 +6,11 @@ import Header from "./components/Header"
 import { ToastContainer } from 'react-toastify';
 import Myreading from './pages/Myreading';
 import Mylibrary from './pages/Mylibrary';
+import AppRoute from './redux/routers/AppRoute';
 
 function App() {
-
-
   return (
     <>
-  
      <Header />
      <AppRoute />
      <ToastContainer />

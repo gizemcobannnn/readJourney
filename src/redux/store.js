@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 const journeyPersistConfig ={
     key:"psychologists",
     storage,
-    whitelist:["psychologists","filters","favorites","psychologist","isLoggedIn","loggedInUser"],
+    whitelist:["journeys","filters","favorites","journey","isLoggedIn","loggedInUser"],
     version:1
 }
 const persistedJourneyReducer = persistReducer(journeyPersistConfig, journeySlice.reducer);

@@ -4,6 +4,9 @@ const initialState={
     name:"journey",
     mylibrary:[],
     myfavorites:[],
+    journeys:[],
+    journey:{},
+    filters:{},
 }
 export const journeySlice= createSlice({
     initialState:initialState,

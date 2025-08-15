@@ -7,9 +7,9 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #141414;
 
-  padding: 3px;
+  padding: 20px;
 }
 
 .errormessage{
@@ -27,4 +27,8 @@
 
 .navlink:focus{
   text-decoration: underline rgb(51, 51, 173) 2px;
+}
+
+.bg-part {
+  background-color: #1F1F1F;
 }

@@ -24,7 +24,15 @@ const Recommendation = () => {
             </div>
         </div>
 
-        <div className='right-side'></div>
+        <div className='right-side p-3'>
+            <div>
+                <h2 className="text-3xl">Recommended</h2>
+                <div className='flex flex-row gap-2'> 
+                    <></>
+                </div>
+            </div>
+            <div className='grid grid-cols-5 gap-3'></div>
+        </div>
     </div>
   )
 }

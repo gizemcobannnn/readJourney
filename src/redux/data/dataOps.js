@@ -1,10 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api";
+
+
+const API_BASE_URL = "https://readjourney.b.goit.study/api";
+
 export const fetchRecommendedBooks = createAsyncThunk(
   "books/recommended",
   async (_, thunkAPI) => {
     try {
-      const response = await api.get("/books/recommend");
+      const response = await api.get("/books/recommend?page=1&limit=10");
       return response.data;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);

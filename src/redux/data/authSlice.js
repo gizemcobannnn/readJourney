@@ -8,6 +8,7 @@ const initialState = {
     refreshToken: "",
     isAuthenticated: false,
     error: null,
+    message: "",
 }
 
 export const authSlice = createSlice({
@@ -25,20 +26,17 @@ export const authSlice = createSlice({
             state.refreshToken = action.payload.refreshToken;
             state.name = action.payload.name;
         })
-        .addCase(loginUser.pending, (state, action) => {
-            state.error = action.payload;
+        .addCase(loginUser.pending, (state) => {
+            state.error = null;
             state.isAuthenticated = false;
-            state.token = "";
-            state.email = "";
-            state.refreshToken="";
-            state.name = "";
+            
         }).addCase(loginUser.rejected, (state,action) => {
             state.token = "";
             state.email = "";
             state.refreshToken="";
             state.name = "";
             state.isAuthenticated = false;
-            state.error = action.payload;
+            state.error = action.payload || action.error.message;
         }).addCase(registerUser.fulfilled, (state,action)=>{
             state.email = action.payload.email;
             state.token = action.payload.token;
@@ -47,10 +45,6 @@ export const authSlice = createSlice({
             state.isAuthenticated = true;
             state.error = null;
         }).addCase(registerUser.pending, (state,)=>{
-            state.email = "";
-            state.token = "";
-            state.refreshToken="";
-            state.name = "";
             state.isAuthenticated = false;
             state.error = null;
         }).addCase(registerUser.rejected, (state,action)=>{
@@ -59,52 +53,47 @@ export const authSlice = createSlice({
             state.refreshToken="";
             state.name = "";
             state.isAuthenticated = false;
-            state.error = action.payload;
+            state.error = action.payload || action.error.message;
         }).addCase(logoutUser.fulfilled, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
+            state.email = "";
+            state.token = "";
+            state.refreshToken="";
+            state.name = "";
             state.isAuthenticated = false;
+            state.message = action.payload.message;
             state.error = null;
-        }).addCase(logoutUser.pending, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
+        }).addCase(logoutUser.pending, (state)=>{
             state.isAuthenticated = true;
             state.error = null;
         }).addCase(logoutUser.rejected, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
             state.isAuthenticated = true;
-            state.error = null;
+            state.error = action.payload || action.error.message;
         }).addCase(currentRefresh.fulfilled, (state,action)=>{
-            state.email = action.payload.email;
             state.token = action.payload.token;
             state.isAuthenticated = true;
+            state.refreshToken = action.payload.refreshToken;
             state.error = null;
-        }).addCase(currentRefresh.pending, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
+        }).addCase(currentRefresh.pending, (state)=>{
             state.isAuthenticated = true;
             state.error = null;
         }).addCase(currentRefresh.rejected, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
-            state.isAuthenticated = true;
-            state.error = null;
+            state.token = "";
+            state.refreshToken = "";
+            state.isAuthenticated = false;
+            state.error = action.payload || action.error.message;
         }).addCase(currentUser.fulfilled, (state,action)=>{
+            state.name = action.payload.name;
             state.email = action.payload.email;
             state.token = action.payload.token;
+            state.refreshToken = action.payload.refreshToken;
             state.isAuthenticated = true;
             state.error = null;
-        }).addCase(currentUser.pending, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
+        }).addCase(currentUser.pending, (state)=>{
             state.isAuthenticated = true;
             state.error = null;
         }).addCase(currentUser.rejected, (state,action)=>{
-            state.email = action.payload.email;
-            state.token = action.payload.token;
             state.isAuthenticated = true;
-            state.error = null;
+            state.error = action.payload || action.error.message;
         })
     }
     

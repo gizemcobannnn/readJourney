@@ -13,7 +13,7 @@ const persistedJourneyReducer = persistReducer(journeyPersistConfig, journeySlic
 
 export const store = configureStore({
     reducer: {
-        journeyreducer: persistedJourneyReducer
+        journey: persistedJourneyReducer
     },
     middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({

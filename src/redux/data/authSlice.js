@@ -89,10 +89,9 @@ export const authSlice = createSlice({
             state.isAuthenticated = true;
             state.error = null;
         }).addCase(currentUser.pending, (state)=>{
-            state.isAuthenticated = true;
             state.error = null;
         }).addCase(currentUser.rejected, (state,action)=>{
-            state.isAuthenticated = true;
+            state.isAuthenticated = false;
             state.error = action.payload || action.error.message;
         })
     }

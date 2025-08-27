@@ -6,13 +6,14 @@ import wallpaper from "../assets/wallpaper.svg"
 import { toast } from 'react-toastify';
 import { registerUser } from '../redux/data/authOps';
 import { useDispatch } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 export default function Registration() {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
   const handleSubmit=async(values,{ setSubmitting,resetForm})=>{
     try{
        const {name,email,password}=values;
-       dispatch(registerUser({name,email,password}).unwrap());
+      await dispatch(registerUser({name,email,password})).unwrap();
         toast.success("Successful registration")
         resetForm();
     }catch(e){
@@ -44,12 +45,12 @@ export default function Registration() {
                         <Field name="name" type="text" placeholder="Name" />
                         <ErrorMessage name="name" component="div" className='errormessage' />
                         <Field name="email" type="email" placeholder="Email"/>
-                        <ErrorMessage name="name" component="div" className='errormessage' />
+                        <ErrorMessage name="email" component="div" className='errormessage' />
                         <Field name="password" type="password" placeholder="Password"/>
-                        <ErrorMessage name="name" component="div" className='errormessage' />
+                        <ErrorMessage name="password" component="div" className='errormessage' />
                         <div className='flex flex-row justify-between mt-7'>
                         <button type="submit" className='authbutton'>Register</button>
-                        <button type="button">Already have an account ?</button></div>
+                        <button type="button"onClick={()=>navigate("/login")}>Already have an account ?</button></div>
                     </Form>
                 </Formik>
             </div>

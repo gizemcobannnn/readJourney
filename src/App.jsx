@@ -11,7 +11,7 @@ import AppRoute from './redux/routers/AppRoute';
 function App() {
   return (
     <>
-     <Header />
+     {/**<Header /> */}
      <AppRoute />
      <ToastContainer />
     </>

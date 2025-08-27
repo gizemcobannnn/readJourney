@@ -4,24 +4,33 @@ import * as Yup from "yup";
 import frame from "../assets/screen-frame.svg"
 import wallpaper from "../assets/wallpaper.svg"
 import { toast } from 'react-toastify';
-
-
+import { loginUser } from '../redux/data/authOps';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
-  const handleSubmit=()=>{
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit=async(values,{resetForm,setSubmitting})=>{
     try{
+      const {email,password}=values;
+        await dispatch(loginUser({email,password})).unwrap();
         toast.success("Successful registration")
+        resetForm();
     }catch(e){
         toast.error("Unsuccessful registration"+e)
+    }finally{
+      setSubmitting(false);
+      console.log("submitted")
     }
   }
   const validationRegister=Yup.object({
     email:Yup.string().email()
     .min(6, "It has to be at least 6 characters")
-    .max(20, "It can be at most 20 characters").required("You have to enter your email"),
+    .max(29, "It can be at most 29 characters").required("You have to enter your email"),
     password: Yup.string()
     .min(6, "It has to be at least 6 characters")
     .max(20, "It can be at most 20 characters")
-    .required("You have to enter your password")  })
+    .required("You have to enter your password")  });
 
   return (
     <div className='grid grid-cols-2 gap-35 p-10'>
@@ -32,12 +41,12 @@ export default function Login() {
                 <Formik initialValues={{name:"",email:"",password:""}} onSubmit={handleSubmit} validationSchema={validationRegister}>
                     <Form className='flex flex-col gap-5'>
                         <Field name="email" type="email" placeholder="Email"/>
-                        <ErrorMessage name="name" component="div" className='errormessage' />
+                        <ErrorMessage name="email" component="div" className='errormessage' />
                         <Field name="password" type="password" placeholder="Password"/>
-                        <ErrorMessage name="name" component="div" className='errormessage' />
+                        <ErrorMessage name="password" component="div" className='errormessage' />
                         <div className='flex flex-row justify-between mt-7'>
                         <button type="submit" className='authbutton'>Login</button>
-                        <button type="button">Don't have an account ?</button></div>
+                        <button type="button" onClick={()=>navigate("/register")}>Don't have an account ?</button></div>
                     </Form>
                 </Formik>
             </div>

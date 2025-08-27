@@ -1,9 +1,10 @@
-import setToken from "../../api";
+import api, {setToken} from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loginUser = createAsyncThunk("users/signin",async ({email,password}, thunkAPI) => {
   try {
-    const response = await setToken.post("/users/signin", {email,password});
+    const response = await api.post("/users/signin", {email,password});
+    setToken(response.data.token);
     return response.data;
   }catch (e) {
     return thunkAPI.rejectWithValue(e.message);

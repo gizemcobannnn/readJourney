@@ -4,14 +4,21 @@ import * as Yup from "yup";
 import frame from "../assets/screen-frame.svg"
 import wallpaper from "../assets/wallpaper.svg"
 import { toast } from 'react-toastify';
-
+import { registerUser } from '../redux/data/authOps';
+import { useDispatch } from 'react-redux';
 
 export default function Registration() {
-  const handleSubmit=()=>{
+  const dispatch = useDispatch();
+  const handleSubmit=async(values,{ setSubmitting,resetForm})=>{
     try{
+       const {name,email,password}=values;
+       dispatch(registerUser({name,email,password}).unwrap());
         toast.success("Successful registration")
+        resetForm();
     }catch(e){
         toast.error("Unsuccessful registration"+e)
+    }finally{
+        setSubmitting(false);
     }
   }
   const validationRegister=Yup.object({

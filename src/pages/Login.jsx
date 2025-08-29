@@ -14,10 +14,10 @@ export default function Login() {
     try{
       const {email,password}=values;
         await dispatch(loginUser({email,password})).unwrap();
-        toast.success("Successful registration")
+        toast.success("Successful login")
         resetForm();
     }catch(e){
-        toast.error("Unsuccessful registration"+e)
+        toast.error("Unsuccessful login"+e)
     }finally{
       setSubmitting(false);
       console.log("submitted")

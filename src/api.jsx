@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: "https://readjourney.b.goit.study/api",
 });
 
-export const setToken = (token) => {
+export const setTokenA = (token) => {
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {

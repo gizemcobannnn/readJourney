@@ -1,17 +1,16 @@
 import  api from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import setToken from "./authSlice"
 
+//sign in: login user and keep tokens, mail,name in redux store in auth 
 export const loginUser = createAsyncThunk("users/signin",async ({email,password}, thunkAPI) => {
   try {
     const response = await api.post("/users/signin", {email,password});
-   
-    setToken(response.data.token);
     return response.data;
   }catch (e) {
     return thunkAPI.rejectWithValue(e.message);
   }});
 
+//sign up: register user and keep tokens, mail,name in redux store in auth 
 export const registerUser = createAsyncThunk("users/signup",async({name,email,password},thunkAPI)=>{
     try{
         const response = await api.post("/users/signup", {name,email,password});

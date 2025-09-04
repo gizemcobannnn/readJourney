@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecommendedBooks } from '../redux/data/dataOps';  
 import imageUrl from '../assets/wallpaper.svg'; 
+import { setToken } from '../redux/data/authSlice';
 const Recommendation = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
+    const token = useSelector((state)=>state.auth.token);
     const handleLibrary = () => {
         navigate("/mylibrary");
         console.log("Navigating to My Library");
@@ -15,7 +17,8 @@ const Recommendation = () => {
 
 
     useEffect(()=>{
-         const fetchRecommended= async() => {
+        setToken(token);
+        const fetchRecommended= async() => {
             try{
                 const recommended = await dispatch(fetchRecommendedBooks()).unwrap();
                 console.log(recommended);

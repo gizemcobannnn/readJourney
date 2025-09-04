@@ -12,6 +12,7 @@ export default function AppRoute() {
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/" element={<Mylibrary />}></Route>
           <Route path="/mylibrary" element={<Mylibrary />}></Route>
           <Route path="/myreading" element={<Myreading />}></Route>
           <Route path="/recommendation" element={<Recommendation />}></Route>

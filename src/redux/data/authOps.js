@@ -1,10 +1,14 @@
-import  api from "../../api";
+import  api,{ setTokenA } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setToken } from "./authSlice";
 
 //sign in: login user and keep tokens, mail,name in redux store in auth 
 export const loginUser = createAsyncThunk("users/signin",async ({email,password}, thunkAPI) => {
   try {
     const response = await api.post("/users/signin", {email,password});
+    const token = response.data.token;
+    await thunkAPI.dispatch(setToken(token));
+    setTokenA(token);
     return response.data;
   }catch (e) {
     return thunkAPI.rejectWithValue(e.message);
@@ -12,11 +16,18 @@ export const loginUser = createAsyncThunk("users/signin",async ({email,password}
 
 //sign up: register user and keep tokens, mail,name in redux store in auth 
 export const registerUser = createAsyncThunk("users/signup",async({name,email,password},thunkAPI)=>{
-    try{
-        const response = await api.post("/users/signup", {name,email,password});
-        return response.data;
-    }catch (e) {
-        thunkAPI.rejectWithValue(e.message)
+    try {
+      const response = await api.post("/users/signup", {
+        name,
+        email,
+        password,
+      });
+      const token = response.data.token;
+      await thunkAPI.dispatch(setToken(token));
+      setTokenA(token);
+      return response.data;
+    } catch (e) {
+      thunkAPI.rejectWithValue(e.message);
     }
 })
 

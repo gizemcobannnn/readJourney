@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { loginUser, registerUser, logoutUser, currentUser, currentRefresh } from "./authOps";
-
+import { setTokenA } from "../../api";  
 
 const initialState = {
     name: "auth",
@@ -18,6 +18,7 @@ export const authSlice = createSlice({
     reducers:{
         setToken(state,action){
             state.token=action.payload;
+            setTokenA(action.payload);
         }
     },
     extraReducers:(builder)=>{
@@ -75,6 +76,7 @@ export const authSlice = createSlice({
             state.isAuthenticated = true;
             state.refreshToken = action.payload.refreshToken;
             state.error = null;
+            setTokenA(null);
         }).addCase(currentRefresh.pending, (state)=>{
             state.isAuthenticated = true;
             state.error = null;

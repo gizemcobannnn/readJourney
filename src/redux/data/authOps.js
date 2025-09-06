@@ -7,8 +7,14 @@ export const loginUser = createAsyncThunk("users/signin",async ({email,password}
   try {
     const response = await api.post("/users/signin", {email,password});
     const token = response.data.token;
+    console.log("LOGIN RESPONSE:", response.data);
+
+
+    console.log("token in authOps:",token);
     await thunkAPI.dispatch(setToken(token));
     setTokenA(token);
+    console.log(api.defaults.headers.common["Authorization"]);
+    console.log("AUTH HEADER:", api.defaults.headers.common["Authorization"]);
     return response.data;
   }catch (e) {
     return thunkAPI.rejectWithValue(e.message);

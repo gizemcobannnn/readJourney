@@ -4,10 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecommendedBooks } from '../redux/data/dataOps';  
 import imageUrl from '../assets/wallpaper.svg'; 
 import { setToken } from '../redux/data/authSlice';
+import { useState } from 'react';
+
+
+
 const Recommendation = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
     const token = useSelector((state)=>state.auth.token);
+    const [recommended, setRecommended] = useState([]);
     const handleLibrary = () => {
         navigate("/mylibrary");
         console.log("Navigating to My Library");
@@ -17,11 +22,15 @@ const Recommendation = () => {
 
 
     useEffect(()=>{
+        console.log("Token in Recommendation:", token);
+        if(!token){
+            navigate("/login");}
         setToken(token);
         const fetchRecommended= async() => {
             try{
-                const recommended = await dispatch(fetchRecommendedBooks()).unwrap();
+                const recommended = await dispatch((fetchRecommendedBooks({ page: 2, limit: 5 }))).unwrap();
                 console.log(recommended);
+                setRecommended(recommended);
             }catch(e){
                 console.log(e.message);
             }
@@ -56,7 +65,7 @@ const Recommendation = () => {
                 </div>
             </div>
             <div className='grid grid-cols-5 gap-3'>
-                {recommendedbooks && recommendedbooks.map((index,book)=>(
+                {recommended && recommended.map((index,book)=>(
                     <div key={index} className='flex flex-col justify-start'>
                     {imageUrl && <img src={imageUrl} alt="book" className="rounded-xl" />}
                         <h2 className='font-md'>{book.title}</h2>

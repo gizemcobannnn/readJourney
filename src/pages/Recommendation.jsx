@@ -42,7 +42,7 @@ const Recommendation = () => {
   }, [dispatch, token, navigate]);
 
   return (
-    <div className="flex  flex-row min-h-screen overflow-hidden justify-between gap-5 p-10 bg-part mt-10">
+    <div className="flex flex-row min-h-screen overflow-hidden justify-between gap-5 p-10 bg-part mt-10">
       <div className="left-side flex flex-col gap-5 w-1/3 text-start p-7 rounded-xl bg-[#1F1F1F]">
         <p className="p-2">Filters: </p>
         <input
@@ -88,7 +88,7 @@ const Recommendation = () => {
           </div>
         </div>
 
-        <ul className="grid grid-cols-3 gap-2">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {recommended?.results?.map((book, index) => (
             <li key={index}>
               <div className="flex flex-col justify-start">
@@ -96,7 +96,7 @@ const Recommendation = () => {
                   <img
                     src={book.imageUrl || imageUrl}
                     alt="book"
-                    className="rounded-xl"
+                    className="rounded-xl h-70 md:h-100 xl:150"
                   />
                 }
                 <h2 className="font-md">{book.title}</h2>

@@ -88,7 +88,7 @@ const Recommendation = () => {
           </div>
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {recommended?.results?.map((book, index) => (
             <li key={index}>
               <div className="flex flex-col justify-start">
@@ -96,7 +96,7 @@ const Recommendation = () => {
                   <img
                     src={book.imageUrl || imageUrl}
                     alt="book"
-                    className="rounded-xl h-70 md:h-100 xl:150"
+                    className="rounded-xl h-70 md:h-90 xl:100"
                   />
                 }
                 <h2 className="font-md">{book.title}</h2>

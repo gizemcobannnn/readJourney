@@ -7,6 +7,7 @@ import { setToken } from "../redux/data/authSlice";
 import { useState } from "react";
 import { setTokenA } from "../api";
 
+
 const Recommendation = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
@@ -99,8 +100,13 @@ const Recommendation = () => {
                     className="rounded-xl h-70 md:h-90 xl:100"
                   />
                 }
-                <h2 className="font-md">{book.title}</h2>
-                <p className="font-sm">{book.author}</p>
+                <h2 className="font-bold ">
+                  {book.title
+                    ? book.title.split(".")[0].trim().charAt(0).toUpperCase() +
+                      book.title.split(".")[0].trim().slice(1).toLowerCase()
+                    : " "}
+                </h2>
+                <p className="font-light text-gray-50 ">{book.author}</p>
               </div>
             </li>
           ))}

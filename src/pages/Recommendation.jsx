@@ -12,8 +12,9 @@ const Recommendation = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [recommended, setRecommended] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
   const handleLibrary = () => {
     navigate("/mylibrary");
     console.log("Navigating to My Library");
@@ -21,6 +22,10 @@ const Recommendation = () => {
   const recommendedbooks = useSelector((state) => state.journey.recommended);
   console.log(recommendedbooks);
 
+  const handlePopUp=(book)=>{
+    setIsOpenPopup(true);
+    setSelectedBook(book)
+  }
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -88,10 +93,14 @@ const Recommendation = () => {
             <></>
           </div>
         </div>
-
+        {
+          isOpenPopup && (
+            <Popup onClose={()=>setIsOpenPopup(false)}  selectedBook={selectedBook}>  </Popup>
+          )
+        }
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {recommended?.results?.map((book, index) => (
-            <li key={index}>
+            <li key={index} onClick={(book)=>handlePopUp(book)}>
               <div className="flex flex-col justify-start">
                 {
                   <img

@@ -52,8 +52,8 @@ export default function Login() {
             </div>
         </div>
         <div className='relative'>
-            <img src={frame} alt="frame" className='absolute top-2 right-0'/>
-            <img src={wallpaper} alt="wallpaper" className='absolute top-8 right-3' />
+            <img src={frame} alt="frame" className='absolute top-1 right-0 rounded-3xl '/>
+            <img src={wallpaper} alt="wallpaper" className='absolute items-center top-6 right-5 md:h-155  rounded-4xl' />
         </div>
     </div>
   )

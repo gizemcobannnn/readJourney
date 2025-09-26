@@ -11,13 +11,15 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  const isAuthenticated= useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {
-    if (token) {
-      navigate("/login");
+    if (token && isAuthenticated) {
+      navigate("/mylibrary");
     } else {
-      toast.info("Please login");
+      //toast.info("Please login");
     }
-  }, [token, navigate]);
+  }, [token, navigate,isAuthenticated]);
+
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
       const { email, password } = values;

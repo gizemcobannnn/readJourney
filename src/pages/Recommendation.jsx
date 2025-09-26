@@ -6,12 +6,14 @@ import imageUrl from "../assets/wallpaper.svg";
 import { setToken } from "../redux/data/authSlice";
 import { useState } from "react";
 import { setTokenA } from "../api";
+import Popup from "../components/Popup";
 
 
 const Recommendation = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  // const isLoggedIn= useSelector((state) => state.auth.isLoggedIn);
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [recommended, setRecommended] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
@@ -23,11 +25,12 @@ const Recommendation = () => {
   console.log(recommendedbooks);
 
   const handlePopUp=(book)=>{
-    setIsOpenPopup(true);
-    setSelectedBook(book)
+  console.log("Clicked book:", book); // test
+  setIsOpenPopup(true);
+  setSelectedBook(book);
   }
   useEffect(() => {
-    if (!token) {
+    if (!token ) {
       navigate("/login");
       return;
     }
@@ -95,12 +98,12 @@ const Recommendation = () => {
         </div>
         {
           isOpenPopup && (
-            <Popup onClose={()=>setIsOpenPopup(false)}  selectedBook={selectedBook}>  </Popup>
+            <Popup onClose={()=>setIsOpenPopup(false)}  selectedBook={selectedBook} />
           )
         }
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {recommended?.results?.map((book, index) => (
-            <li key={index} onClick={(book)=>handlePopUp(book)}>
+            <li key={index} onClick={()=>handlePopUp(book)}>
               <div className="flex flex-col justify-start">
                 {
                   <img

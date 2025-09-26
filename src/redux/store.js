@@ -5,16 +5,16 @@ import { authSlice } from './data/authSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 const journeyPersistConfig ={
-    key:"psychologists",
+    key:"journey",
     storage,
-    whitelist:["journeys","filters","favorites","journey"],
+    whitelist:["journeys","filters","favorites","journey","recommendations"],
     version:1
 }
 
 const authPersistConfig ={
     key:"auth",
     storage,
-    whitelist:["isLoggedIn","loggedInUser","token"],
+    whitelist:["isAuthenticated","loggedInUser","token"],
     version:1
 }
 

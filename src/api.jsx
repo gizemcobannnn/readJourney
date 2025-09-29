@@ -7,6 +7,7 @@ const api = axios.create({
 export const setTokenA = (token) => {
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    localStorage.setItem("tokenReading", JSON.stringify(token));
   } else {
     delete api.defaults.headers.common["Authorization"];
   }

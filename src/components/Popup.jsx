@@ -2,11 +2,18 @@ import React from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import {addBook} from '../redux/data/dataOps';
 import { createPortal } from 'react-dom'
+import { useDispatch } from 'react-redux';
 const Popup = ({onClose, selectedBook}) => {
-  const addLibrary=async()=>{
+  const dispatch = useDispatch();
+  const addLibrary = async()=>{
     console.log("Added to library");
-    await addBook(selectedBook);
-
+       try {
+      const result = await dispatch(addBook(selectedBook)).unwrap();
+      console.log("Success:", result);
+      onClose(); // ekledikten sonra popup kapanabilir
+    } catch (err) {
+      console.error("Failed to add book:", err);
+    }
   }
   return createPortal(
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50'>

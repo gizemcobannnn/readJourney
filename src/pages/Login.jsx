@@ -10,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.token) || JSON.parse(localStorage.getItem("tokenReading"));
   const isAuthenticated= useSelector((state) => state.auth.isAuthenticated);
+
   useEffect(() => {
     if (token && isAuthenticated) {
       navigate("/mylibrary");

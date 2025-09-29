@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 //import {fetchRecommendedBooks,addBook, addRecommendedBook, deleteUserBook,fetchOwnBook,saveReadingStart,saveReadingFinish,deleteReading,fetchInfo} from "./dataOps"
-import {fetchRecommendedBooks} from "./dataOps"
+import {fetchRecommendedBooks,addBook, fetchOwnBook} from "./dataOps"
 const initialState={
     name:"journey",
     mylibrary:[],
@@ -36,6 +36,18 @@ export const journeySlice= createSlice({
         // eslint-disable-next-line no-unused-vars
         .addCase(fetchRecommendedBooks.pending,(state)=>{
             console.log("Fetching recommended books...", );
+        })
+        .addCase(addBook.fulfilled,(state,action)=>{
+            state.mylibrary.push(action.payload);
+        })
+        .addCase(addBook.pending)
+        .addCase(addBook.rejected)
+        .addCase(fetchOwnBook.fulfilled,(state,action)=>{
+            state.mylibrary=action.payload;
+        })
+        .addCase(fetchOwnBook.pending)
+        .addCase(fetchOwnBook.rejected,(state)=>{
+            state.mylibrary=[];
         })
     }
 })

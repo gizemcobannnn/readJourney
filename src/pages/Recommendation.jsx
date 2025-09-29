@@ -7,7 +7,7 @@ import { setToken } from "../redux/data/authSlice";
 import { useState } from "react";
 import { setTokenA } from "../api";
 import Popup from "../components/Popup";
-
+import {setRecommended} from '../redux/data/dataSlice';
 
 const Recommendation = () => {
   let navigate = useNavigate();
@@ -15,7 +15,7 @@ const Recommendation = () => {
   const token = useSelector((state) => state.auth.token);
   // const isLoggedIn= useSelector((state) => state.auth.isLoggedIn);
   const [isOpenPopup, setIsOpenPopup] = useState(false);
-  const [recommended, setRecommended] = useState([]);
+  const [recommended, setRecommendedBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const handleLibrary = () => {
     navigate("/mylibrary");
@@ -42,7 +42,9 @@ const Recommendation = () => {
           fetchRecommendedBooks({ page: 1, limit: 7 })
         ).unwrap();
         console.log(recommended);
+        setRecommendedBooks(recommended);
         setRecommended(recommended);
+      
       } catch (e) {
         console.log(e.message);
       }

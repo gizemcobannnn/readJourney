@@ -20,9 +20,9 @@ export const fetchRecommendedBooks = createAsyncThunk(
 
 export const addBook = createAsyncThunk(
   "books/addbook",
-  async (_, thunkAPI) => {
+  async (selectedBook, thunkAPI) => {
     try {
-      const response = await api.post("/books/add");
+      const response = await api.post("/books/add",{title:selectedBook.title, author:selectedBook.author, totalPages:selectedBook.totalPages});
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

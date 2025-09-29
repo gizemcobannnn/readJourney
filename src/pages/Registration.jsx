@@ -5,11 +5,21 @@ import frame from "../assets/screen-frame.svg"
 import wallpaper from "../assets/wallpaper.svg"
 import { toast } from 'react-toastify';
 import { registerUser } from '../redux/data/authOps';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 export default function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
+  const token = useSelector(state=>state.auth.token);
+  const isAuthenticated= useSelector((state) => state.auth.isAuthenticated);
+    useEffect(() => {
+      if (token && isAuthenticated) {
+        navigate("/mylibrary");
+      } else {
+        //toast.info("Please login");
+      }
+    }, [token, navigate,isAuthenticated]);
   const handleSubmit=async(values,{ setSubmitting,resetForm})=>{
     try{
        const {name,email,password}=values;

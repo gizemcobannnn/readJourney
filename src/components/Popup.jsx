@@ -1,8 +1,13 @@
 import React from 'react'
 import { IoCloseSharp } from "react-icons/io5";
-
+import {addBook} from '../redux/data/dataOps';
 import { createPortal } from 'react-dom'
 const Popup = ({onClose, selectedBook}) => {
+  const addLibrary=async()=>{
+    console.log("Added to library");
+    await addBook(selectedBook);
+
+  }
   return createPortal(
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50'>
         <div className='flex items-center flex-col gap-3 bg-[#262626] p-5 rounded-lg w-1/3'>
@@ -11,7 +16,7 @@ const Popup = ({onClose, selectedBook}) => {
         <h3 className="text-slate-100 font-semibold">{selectedBook.title}</h3>
         <h3>{selectedBook.author}</h3>
         <h3>pagesd</h3>
-        <button className='text-slate-100 font-semibold'>Add to library</button>
+        <button className='text-slate-100 font-semibold' onClick={()=>addLibrary(selectedBook)}>Add to library</button>
         </div>
     </div>,document.body
   )
